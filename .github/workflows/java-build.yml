@@ -1,0 +1,20 @@
+# .github/workflows/java-build.yml
+name: Reusable Java Build
+
+on:
+  workflow_call:
+    inputs:
+      java-version:
+        required: false
+        type: string
+        default: '17'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: ${{ inputs.java-version }}
+      - run: mvn clean install
